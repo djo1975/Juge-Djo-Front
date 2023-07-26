@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://booking-api-nhmg.onrender.com';
+const BASE_URL = 'http://localhost:3000';
 
 const signUp = async (username, email, password, passwordConfirmation) => {
   try {

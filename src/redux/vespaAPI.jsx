@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const vespaApi = createApi({
   reducerPath: 'vespaApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://booking-api-nhmg.onrender.com',
+    baseUrl: 'http://localhost:3000',
 
     prepareHeaders: (headers, { getState }) => {
       const { token } = getState().persistedReducer;
