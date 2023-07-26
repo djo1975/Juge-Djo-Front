@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useGetAllVespasQuery, useDeleteVespaMutation } from '../redux/vespaAPI';
+import { useGetAllRoomsQuery, useDeleteRoomMutation } from '../redux/roomAPI';
 
 const DeleteModal = ({ onClose }) => {
-  const { data: vespasData } = useGetAllVespasQuery();
+  const { data: roomsData } = useGetAllRoomsQuery();
 
-  const [deleteVespa, { isLoading: isDeleting }] = useDeleteVespaMutation();
+  const [deleteRoom, { isLoading: isDeleting }] = useDeleteRoomMutation();
 
   const [checked, setChecked] = useState([]);
 
@@ -19,7 +19,7 @@ const DeleteModal = ({ onClose }) => {
   const handleDelete = async () => {
     for (const id of checked) {
       try {
-        await deleteVespa(id);
+        await deleteRoom(id);
       } catch (error) {
         console.log(error);
       }
@@ -39,17 +39,17 @@ const DeleteModal = ({ onClose }) => {
     >
       <div className="bg-white w-80 max-w-md p-6 rounded">
         <div className="max-h-60 lg:overflow-y-auto scrollbar md:overflow-y-auto z-100">
-          <h2 className="text-center">Vespas</h2>
+          <h2 className="text-center">Rooms</h2>
           <ul>
-            {vespasData?.map((vespa) => (
-              <li key={vespa.id}>
+            {roomsData?.map((room) => (
+              <li key={room.id}>
                 <input
                   className="mr-5"
                   type="checkbox"
-                  checked={checked.includes(vespa.id)}
-                  onChange={() => handleCheckbox(vespa.id)}
+                  checked={checked.includes(room.id)}
+                  onChange={() => handleCheckbox(room.id)}
                 />
-                {vespa.name}
+                {room.name}
               </li>
             ))}
           </ul>

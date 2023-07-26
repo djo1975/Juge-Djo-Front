@@ -88,9 +88,9 @@ const NavigationPanel = () => {
                   <img src={logo} alt="logo" className="w-40 mb-10 rounded-lg h-35" />
                 </Link>
               </li>
-              <Link to="/addvespa" className="text-lg">
+              <Link to="/addroom" className="text-lg">
                 <li className="mb-1 pr-14 py-2 pl-2 text-gray-700 hover:bg-[#a3c837] hover:text-white">
-                  ADD VESPA
+                  ADD ROOM
                 </li>
               </Link>
               <Link to="/myreservations" className="text-lg">
@@ -100,7 +100,7 @@ const NavigationPanel = () => {
               </Link>
               <button className="text-lg" onClick={handleDelete}>
                 <li className="mb-1 pr-16 py-2 pl-2 text-left text-gray-700 hover:bg-[#a3c837] hover:text-white">
-                  DELETE VESPA
+                  DELETE ROOM
                 </li>
               </button>
               <Link to="/reserve" className="text-lg">

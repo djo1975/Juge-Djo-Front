@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import { useGetAllVespasQuery } from '../redux/vespaAPI';
-import Vespa from './Vespa';
+import { useGetAllRoomsQuery } from '../redux/roomAPI';
+import Room from './Room';
 
 const Carousel = () => {
   const [mobileMode, setMobileMode] = useState(false);
 
-  const { data: vespas, error, isLoading } = useGetAllVespasQuery();
+  const { data: rooms, error, isLoading } = useGetAllRoomsQuery();
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,7 +35,7 @@ const Carousel = () => {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Oops! Something went wrong...</p>;
 
-  const slidesToShow = vespas.length > 3 ? 3 : vespas.length;
+  const slidesToShow = rooms.length > 3 ? 3 : rooms.length;
 
   const settings = {
     infinite: false,
@@ -74,8 +74,8 @@ const Carousel = () => {
   return (
     <div className="flex h-5/6 w-full">
       <Slider {...settings} className="flex justify-center items-center w-full my-auto h-5/6">
-        {vespas?.map((vespa) => (
-            <Vespa key={vespa.id} {...vespa} />
+        {rooms?.map((room) => (
+            <Room key={room.id} {...room} />
         ))}
       </Slider>
     </div>

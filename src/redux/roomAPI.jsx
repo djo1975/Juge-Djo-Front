@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const vespaApi = createApi({
-  reducerPath: 'vespaApi',
+export const roomApi = createApi({
+  reducerPath: 'roomApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3000',
 
@@ -14,32 +14,32 @@ export const vespaApi = createApi({
     },
   }),
   keepUnusedDataFor: 60 * 60 * 60,
-  tagTypes: ['Vespa', 'Reservation', 'Comment'],
+  tagTypes: ['Room', 'Reservation', 'Comment'],
   endpoints: (builder) => ({
-    getAllVespas: builder.query({
-      query: () => '/vespas',
+    getAllRooms: builder.query({
+      query: () => '/rooms',
       providesTags: (result) => (result
-        ? [...result.map(({ id }) => ({ type: 'Vespa', id })), { type: 'Vespa', id: 'LIST' }]
-        : [{ type: 'Vespa', id: 'LIST' }]),
+        ? [...result.map(({ id }) => ({ type: 'Room', id })), { type: 'Room', id: 'LIST' }]
+        : [{ type: 'Room', id: 'LIST' }]),
     }),
 
-    createNewVespa: builder.mutation({
+    createNewRoom: builder.mutation({
       query: (body) => ({
-        url: '/vespas',
+        url: '/rooms',
         method: 'POST',
         body,
       }),
 
-      invalidatesTags: [{ type: 'Vespa', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Room', id: 'LIST' }],
     }),
 
-    deleteVespa: builder.mutation({
+    deleteRoom: builder.mutation({
       query: (id) => ({
-        url: `/vespas/${id}`,
+        url: `/rooms/${id}`,
         method: 'DELETE',
       }),
 
-      invalidatesTags: (result, error, id) => [{ type: 'Vespa', id }],
+      invalidatesTags: (result, error, id) => [{ type: 'Room', id }],
     }),
 
     getAllReservations: builder.query({
@@ -90,5 +90,5 @@ export const vespaApi = createApi({
 });
 
 export const {
-  useGetAllVespasQuery, useCreateReservationMutation, useGetAllReservationsQuery, useCreateNewVespaMutation, useDeleteVespaMutation, useGetAllCommentsQuery, useCreateCommentMutation,
-} = vespaApi;
+  useGetAllRoomsQuery, useCreateReservationMutation, useGetAllReservationsQuery, useCreateNewRoomMutation, useDeleteRoomMutation, useGetAllCommentsQuery, useCreateCommentMutation,
+} = roomApi;

@@ -30,8 +30,8 @@ const Details = () => {
       <div className="flex flex-col-reverse p-2 mt-2 md:mx-0 md:col-span-3 lg:col-span-2 md:flex-col">
         <div className="flex flex-col items-center w-full">
           <p className="text-2xl font-bold">{name}</p>
-          <NewCommentForm vespaId={id} />
-          <CommentsList vespaId={id} />
+          <NewCommentForm roomId={id} />
+          <CommentsList roomId={id} />
         </div>
         <button className="flex items-center self-center justify-between w-40 h-12 py-4 mt-8 mb-4 text-lg text-center text-white border-none outline-none rounded-2xl bg-lime-500 hover:bg-green-500" onClick={handleReserve}>
           <p className="ml-10 text-lg font-bold">Reserve</p>

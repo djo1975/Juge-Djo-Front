@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import getPallete from '../helpers/pallete';
 
-const Vespa = ({
+const Room = ({
   icon: url, name, description, id,
 }) => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Vespa = ({
 
   const myShade = pallete?.LightVibrant.getHex();
 
-  const handleVespaClicked = () => {
+  const handleRoomClicked = () => {
     navigate('/details', { state: { url, name, id } });
   };
 
@@ -28,7 +28,7 @@ const Vespa = ({
       <div
         className="relative flex items-center p-2 mt-8 rounded-full w-60 h-60 hover:outline hover:outline-dotted hover:outline-sky-400 hover:outline-2xl hover:outline-offset-4 hover:cursor-pointer "
         style={{ backgroundColor: myShade }}
-        onClick={handleVespaClicked}
+        onClick={handleRoomClicked}
       >
         <img
           src={url}
@@ -99,4 +99,4 @@ const Vespa = ({
   );
 };
 
-export default Vespa;
+export default Room;

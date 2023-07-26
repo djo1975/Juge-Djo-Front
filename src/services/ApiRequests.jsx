@@ -32,9 +32,9 @@ const login = async (email, password) => {
   }
 };
 
-const deleteVespa = async (id, token) => {
+const deleteRoom = async (id, token) => {
   try {
-    const response = await axios.delete(`${BASE_URL}/vespas/${id}`, {
+    const response = await axios.delete(`${BASE_URL}/rooms/${id}`, {
       headers: {
         Authorization: `${token}`,
       },
@@ -48,7 +48,7 @@ const deleteVespa = async (id, token) => {
 const apiRequests = {
   signUp,
   login,
-  deleteVespa,
+  deleteRoom,
 };
 
 export default apiRequests;

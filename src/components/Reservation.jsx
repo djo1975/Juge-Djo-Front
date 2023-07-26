@@ -1,16 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useGetAllVespasQuery } from '../redux/vespaAPI';
+import { useGetAllRoomsQuery } from '../redux/roomAPI';
 
 const Reservation = ({ reservation }) => {
   const localId = useSelector((state) => state.persistedReducer.id);
-  const { data: vespas = [] } = useGetAllVespasQuery();
+  const { data: rooms = [] } = useGetAllRoomsQuery();
 
-  // Find the vespa object that corresponds to reservation.vespa_id
-  const vespa = vespas.find((r) => r.id === reservation.vespa_id);
+  // Find the room object that corresponds to reservation.room_id
+  const room = rooms.find((r) => r.id === reservation.room_id);
 
-  if (localId !== reservation.user_id || !vespa) {
-    return null; // Don't show the reservation if it doesn't belong to the current user or if the corresponding vespa can't be found
+  if (localId !== reservation.user_id || !room) {
+    return null; // Don't show the reservation if it doesn't belong to the current user or if the corresponding room can't be found
   }
 
   return (
@@ -18,7 +18,7 @@ const Reservation = ({ reservation }) => {
       <div className="overflow-hidden overflow-x-auto">
         <h2>
           Name:&nbsp;
-          {vespa.name}
+          {room.name}
         </h2>
         <p>
           Description:&nbsp;

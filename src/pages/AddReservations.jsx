@@ -6,16 +6,16 @@ import backimg from '../assets/background.jpg';
 
 import { Toast, useToast } from '../components/Toast';
 
-import { useGetAllVespasQuery, useCreateReservationMutation } from '../redux/vespaAPI';
+import { useGetAllRoomsQuery, useCreateReservationMutation } from '../redux/roomAPI';
 
 const AddReservations = () => {
   const location = useLocation();
   const chosenID = location?.state?.id || 0;
 
-  const vespaRef = useRef(null);
-  const vespaErrorRef = useRef(null);
+  const roomRef = useRef(null);
+  const roomErrorRef = useRef(null);
 
-  const { data: vespas, error, isLoading } = useGetAllVespasQuery();
+  const { data: rooms, error, isLoading } = useGetAllRoomsQuery();
   const [createReservation, { isLoading: isCreating, data: mutationData }] = useCreateReservationMutation();
 
   const userID = useSelector((state) => state.persistedReducer.id);
@@ -27,7 +27,7 @@ const AddReservations = () => {
     endDate: '',
     startDate: '',
     description: '',
-    selectedVespa: chosenID,
+    selectedRoom: chosenID,
   };
 
   const [reservationData, setReservationData] = useState(initialFormData);
@@ -52,30 +52,30 @@ const AddReservations = () => {
     setStartDateMaxDate(e.target.value);
   };
 
-  const handleVespaOnBlur = (e) => {
-    if (reservationData.selectedVespa !== '') {
-      vespaErrorRef.current.classList.add('invisible');
-      vespaRef.current.classList.remove('border-red-700');
-      vespaRef.current.classList.add('border-white');
+  const handleRoomOnBlur = (e) => {
+    if (reservationData.selectedRoom !== '') {
+      roomErrorRef.current.classList.add('invisible');
+      roomRef.current.classList.remove('border-red-700');
+      roomRef.current.classList.add('border-white');
     }
   };
 
   const handleSubmit = (e) => {
-    if (reservationData.selectedVespa === '') {
-      vespaErrorRef.current.classList.remove('invisible');
-      vespaRef.current.classList.remove('border-white');
+    if (reservationData.selectedRoom === '') {
+      roomErrorRef.current.classList.remove('invisible');
+      roomRef.current.classList.remove('border-white');
 
-      vespaRef.current.classList.add('border-red-700');
+      roomRef.current.classList.add('border-red-700');
       e.preventDefault();
     } else {
-      vespaErrorRef.current.classList.add('invisible');
-      vespaRef.current.classList.remove('border-red-700');
-      vespaRef.current.classList.add('border-white');
+      roomErrorRef.current.classList.add('invisible');
+      roomRef.current.classList.remove('border-red-700');
+      roomRef.current.classList.add('border-white');
 
       const reservation = {
         reservation: {
           user_id: userID,
-          vespa_id: reservationData.selectedVespa,
+          room_id: reservationData.selectedRoom,
           start_date: startDate,
           end_date: endDate,
           description: reservationData.description,
@@ -112,14 +112,14 @@ const AddReservations = () => {
         <img src={backimg} alt="Background" className="object-fill w-full h-full " />
         <div className="absolute inset-0 z-0 opacity-90 bg-[#96bf01]" />
       </div>
-      <h1 className="z-10 mt-8 font-mono text-3xl font-bold tracking-widest">Book A Vespa</h1>
+      <h1 className="z-10 mt-8 font-mono text-3xl font-bold tracking-widest">Book A Room</h1>
       <hr className="z-10 w-2/5 bg-gray-600" />
       <p className="z-10 tracking-widest text-center">
         There are
         {' '}
-        {vespas.length}
+        {rooms.length}
         {' '}
-        Vespas available for rent. Please select the Vespa you want to rent, and the start
+        Rooms available for rent. Please select the Room you want to rent, and the start
         and end date of your reservation
       </p>
 
@@ -127,27 +127,27 @@ const AddReservations = () => {
         <div className="z-10 flex flex-col items-center space-y-4 ">
           <div className="z-10 flex flex-col gap-4 md:flex-row lg:flex-row">
             <div className="flex flex-col space-y-0 items-center mt-1.5">
-              <small ref={vespaErrorRef} className="invisible mb-1 text-red-700">
+              <small ref={roomErrorRef} className="invisible mb-1 text-red-700">
                 {' '}
-                Select a Vespa
+                Select a Room
               </small>
 
               <select
-                id="vespas"
-                name="selectedVespa"
-                ref={vespaRef}
-                value={reservationData.selectedVespa}
+                id="rooms"
+                name="selectedRoom"
+                ref={roomRef}
+                value={reservationData.selectedRoom}
                 onChange={handleOnChange}
-                onBlur={handleVespaOnBlur}
+                onBlur={handleRoomOnBlur}
                 className="h-12 px-4 font-semibold bg-transparent border-2 border-white rounded-full text-white-200 mt-7 required"
               >
                 <option value="" disabled="" className="hidden">
-                  Choose a Vespa
+                  Choose a Room
                 </option>
 
-                {vespas.map((vespa) => (
-                  <option value={vespa.id} key={vespa.id} className="text-lg text-black">
-                    {vespa.name}
+                {rooms.map((room) => (
+                  <option value={room.id} key={room.id} className="text-lg text-black">
+                    {room.name}
                   </option>
                 ))}
               </select>

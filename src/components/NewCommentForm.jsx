@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { useCreateCommentMutation } from '../redux/vespaAPI';
+import { useCreateCommentMutation } from '../redux/roomAPI';
 
-const NewCommentForm = ({ vespaId }) => {
+const NewCommentForm = ({ roomId }) => {
   const [createComment, { isLoading: isCreatingComment }] = useCreateCommentMutation();
   const userID = useSelector((state) => state.persistedReducer.id);
   const [comment, setComment] = useState('');
@@ -18,7 +18,7 @@ const NewCommentForm = ({ vespaId }) => {
     const body = {
       comment: {
         content: comment,
-        vespa_id: vespaId,
+        room_id: roomId,
         user_id: userID,
       },
     };
